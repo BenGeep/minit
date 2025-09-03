@@ -2,7 +2,7 @@ import init, { fill_docx_multi } from 'https://cdn.jsdelivr.net/gh/BenGeep/minit
 
 class selectGyartasAndFormular {
     constructor() {
-        this.workerGenerateIndex = new Worker('https://cdn.jsdelivr.net/gh/BenGeep/minit@main/formular/js/worker/workerGenerateIndex.js', {type:'module'})
+        this.workerGenerateIndex = new Worker('/main/formular/utils/js/worker/workerGenerateIndex.js', {type:'module'})
         this.workerGetData  = new Worker('/main/sic/js/worker/workerGetData.js', {type:'module'});
         console.log('Work')
         this.datumVonal = new Map([
