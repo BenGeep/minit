@@ -1,4 +1,4 @@
-import init, { fill_docx_multi } from './library/docx_filler_js/docx_filler.js';
+import init, { fill_docx_multi } from 'https://cdn.jsdelivr.net/gh/BenGeep/minit@main/formular/js/library/docx_filler_js/docx_filler.js';
 
 class selectGyartasAndFormular {
     constructor() {
