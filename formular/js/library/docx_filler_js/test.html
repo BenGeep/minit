@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DOCX Multi Placeholder Filler</title>
+</head>
+<body>
+
+<h2>Fill DOCX Template</h2>
+
+<button id="fill-btn">Fill DOCX and Download</button>
+
+<a id="download" style="display:none; margin-left:10px;">Download Filled DOCX</a>
+
+<script type="module">
+  import init, { fill_docx_multi } from './docx_filler.js';
+
+  async function fillFromServer() {
+    await init();
+
+    const url = './F-1.23_A.docx';  // Your DOCX template URL
+    const placeholders = ["#D", "#N", "#L"];
+    const values = ["Valalasdasda", "Bagdyads", "Bratislava"];
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Failed to fetch file from server');
+      const arrayBuffer = await response.arrayBuffer();
+
+      const filledBytes = fill_docx_multi(
+        new Uint8Array(arrayBuffer),
+        placeholders,
+        values
+      );
+
+      const blob = new Blob([filledBytes], {
+        type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      });
+
+      const downloadUrl = URL.createObjectURL(blob);
+
+      const downloadLink = document.getElementById('download');
+      downloadLink.href = downloadUrl;
+      downloadLink.download = 'filled.docx';
+      downloadLink.style.display = 'inline';
+      downloadLink.textContent = 'Download Filled DOCX';
+    } catch (e) {
+      alert('Error: ' + e.message);
+    }
+  }
+
+  document.getElementById('fill-btn').addEventListener('click', fillFromServer);
+</script>
+
+</body>
+</html>
