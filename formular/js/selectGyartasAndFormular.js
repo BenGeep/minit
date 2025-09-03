@@ -4,7 +4,7 @@ class selectGyartasAndFormular {
     constructor() {
         this.workerGenerateIndex = new Worker('https://cdn.jsdelivr.net/gh/BenGeep/minit@main/formular/js/worker/workerGenerateIndex.js', {type:'module'})
         this.workerGetData  = new Worker('/main/sic/js/worker/workerGetData.js', {type:'module'});
-        
+        console.log('Work')
         this.datumVonal = new Map([
             ['datum', ''], 
             ['vonal','']
